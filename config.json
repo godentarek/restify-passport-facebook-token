@@ -1,0 +1,6 @@
+{
+    "db": {
+        "url": "mongodb://localhost:27017/node-restify-passport-mongoose-api"
+    },
+    "port": 8000
+}
