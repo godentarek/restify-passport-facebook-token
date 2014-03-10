@@ -1,18 +1,18 @@
 {
-  "name": "node-restify-passport-mongoose-api",
-  "version": "0.1.0",
-  "private": false,
-  "scripts": {
-    "start": "node app"
-  },
-  "dependencies": {
-    "restify": "~2.6.3",
-    "mongoose": "~3.8.8",
-	"passport": "~0.2.0",
-	"passport-localapikey": "~0.0.3"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:cgault/node-restify-passport-mongoose-api.git"
-  }
+    "dependencies": {
+        "mongoose": "~3.8.8",
+        "passport": "~0.2.0",
+        "passport-localapikey": "~0.0.3",
+        "restify": "~2.6.3"
+    },
+    "name": "node-restify-passport-mongoose-api",
+    "private": false,
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:cgault/node-restify-passport-mongoose-api.git"
+    },
+    "scripts": {
+        "start": "node app"
+    },
+    "version": "0.1.0"
 }
