@@ -2,5 +2,11 @@
     "db": {
         "url": "mongodb://localhost:27017/rest-api"
     },
-    "port": 8000
+    "port": 8000,
+	"google":{
+		"loginPath":"/auth/google",
+		"callbackPath":"/auth/google/return",
+		"returnUrl":"http://localhost:8000/auth/google/return",
+		"realm":"http://localhost:8000/"
+	}
 }

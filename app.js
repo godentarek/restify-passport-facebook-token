@@ -19,8 +19,11 @@ require('./lib/database')(config, function(err, mongoose) {
 	// Build models
 	var db = require('./models')(mongoose, config);
 
+	// Setup Security
+	var passport = require('./lib/passport')(config, server, db);
+
 	// Setup API routes
-	require('./routes')(server, restify, db);
+	require('./routes')(server, restify, db, passport);
 
 	// Start Server
 	server.listen(config.port, function() {
