@@ -1,7 +1,7 @@
 var restify = require('restify');
 var config = require('./config.json');
 var server = restify.createServer({
-	name: 'nucleus-api'
+	name: 'node-restify-passport-mongoose-api'
 });
 
 // Config API settings
