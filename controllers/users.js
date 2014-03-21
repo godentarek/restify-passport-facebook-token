@@ -1,5 +1,13 @@
 function UserApi(db) {
 
+	var restify = require('restify');
+
+	this.getAll = function(reg, res, next) {
+		db.User.find({}, function(error, users) {
+			res.send(users);
+		});
+	}
+
 	this.get = function(req, res, next) {
 		db.User.findOne({_id: req.params.id}, function(error, user) {
 			if (error) {
@@ -12,12 +20,6 @@ function UserApi(db) {
 			}
 		});
 	}
-	
-	this.getAll = function(reg, res, next) {
-		db.User.find({}, function(error, users) {
-			res.send(users);
-		});
-	}
 
 	this.post = function(req, res, next) {
 		if (req.params.email === undefined) {
@@ -28,7 +30,7 @@ function UserApi(db) {
 			fname: req.params.fname,
 			lname: req.params.lname
 		};
-		var user = new User(userData);
+		var user = new db.User(userData);
 		user.save(function(error, data) {
 			if (error) {
 				return next(new restify.InvalidArgumentError(JSON.stringify(error.errors)));
@@ -66,6 +68,7 @@ function UserApi(db) {
 		});
 	}
 }
+
 module.exports = function(db) {
 	return new UserApi(db)
 }
