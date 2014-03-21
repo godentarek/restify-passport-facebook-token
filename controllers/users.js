@@ -5,7 +5,7 @@ function UserApi(db) {
 	this.show = function(req, res) {
 		db.User.findOne(ObjectId(req.params.uid), function(err, user) {
 			if (err || !user) {
-				return res.send(403, {
+				return res.send(404, {
 					error: 'Invalid user'
 				})
 			}
