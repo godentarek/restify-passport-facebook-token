@@ -1,5 +1,10 @@
 function UserApi(restify, db) {
 
+	function isValidEmail(email) {
+	    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	    return re.test(email);
+	} 
+
 	this.getAll = function(req, res, next) {
 		db.User.find({}, function(error, users) {
 			res.send(users);
@@ -22,7 +27,7 @@ function UserApi(restify, db) {
 	}
 
 	this.post = function(req, res, next) {
-		if (req.params.email === undefined) {
+		if (!isValidEmail(req.params.email)) {
 			return next(new restify.InvalidArgumentError('Email must be supplied'));
 		}
 		var userData = {
@@ -34,8 +39,6 @@ function UserApi(restify, db) {
 		user.save(function(error, data) {
 			if (error) {
 				return next(new restify.InvalidArgumentError(JSON.stringify(error.errors)));
-			} else {
-				res.json(data);
 			}
 			res.send(201, user);
 			return next();
@@ -43,7 +46,7 @@ function UserApi(restify, db) {
 	}
 	
 	this.put = function(req, res, next) {
-		if (req.params.email === undefined) {
+		if (!isValidEmail(req.params.email)) {
 			return next(new restify.INvalidArgumentError('Email must be supplied'));
 		}
 		var userData = {
