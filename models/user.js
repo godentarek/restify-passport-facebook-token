@@ -9,12 +9,12 @@ module.exports = function(mongoose, config) {
 			required: true,
 			trim: true
 		},
-		fname: {
+		firstName: {
 			type: String,
 			required: false,
 			trim: true
 		},
-		lname: {
+		lastName: {
 			type: String,
 			required: false,
 			trim: true

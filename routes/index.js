@@ -1,8 +1,9 @@
-module.exports = function(server, db) {
+module.exports = function(server, restify, db) {
 
 	function req(route) {
-		return require('./' + route)(server, db);
+		require('./' + route)(server, restify, db);
 	}
 
 	req('user');
+	req('static');
 };

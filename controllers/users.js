@@ -1,10 +1,9 @@
-function UserApi(db) {
+function UserApi(restify, db) {
 
-	var restify = require('restify');
-
-	this.getAll = function(reg, res, next) {
+	this.getAll = function(req, res, next) {
 		db.User.find({}, function(error, users) {
 			res.send(users);
+			next();
 		});
 	}
 
@@ -18,6 +17,7 @@ function UserApi(db) {
 			} else {
 				res.send(404);
 			}
+			return next();
 		});
 	}
 
@@ -27,8 +27,8 @@ function UserApi(db) {
 		}
 		var userData = {
 			email: req.params.email,
-			fname: req.params.fname,
-			lname: req.params.lname
+			firstName: req.params.firstName,
+			lastName: req.params.lastName
 		};
 		var user = new db.User(userData);
 		user.save(function(error, data) {
@@ -38,6 +38,7 @@ function UserApi(db) {
 				res.json(data);
 			}
 			res.send(201, user);
+			return next();
 		});
 	}
 	
@@ -47,28 +48,29 @@ function UserApi(db) {
 		}
 		var userData = {
 			email: req.params.email,
-			fname: req.params.fname,
-			lname: req.params.lname
+			firstName: req.params.firstName,
+			lastName: req.params.lastName
 		};
 		db.User.update({_id: req.params.id}, userData, {multi: false}, function(error, user) {
 			if (error) {
 				return next(new restify.InvalidArgymentError(JSON.stringify(error.errors)));
 			}
 			res.send();
+			return next();
 		});
 	}
 	
 	this.del = function(req, res, next) {
 		db.User.remove({_id: req.params.id}, function(error, user) {
 			if (error) {
-				return
-				next(new restify.InvalidArgumentError(JSON.stringify(error.errors)));
+				return next(new restify.InvalidArgumentError(JSON.stringify(error.errors)));
 			}
 			res.send();
+			return next();
 		});
 	}
 }
 
-module.exports = function(db) {
-	return new UserApi(db)
+module.exports = function(restify, db) {
+	return new UserApi(restify, db)
 }

@@ -20,7 +20,7 @@ require('./lib/database')(config, function(err, mongoose) {
 	var db = require('./models')(mongoose, config);
 
 	// Setup API routes
-	require('./routes')(server, db);
+	require('./routes')(server, restify, db);
 
 	// Start Server
 	server.listen(config.port, function() {
