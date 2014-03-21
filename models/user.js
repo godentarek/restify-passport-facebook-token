@@ -4,19 +4,21 @@ module.exports = function(mongoose, config) {
 	var ObjectId = Schema.Types.ObjectId;
 
 	var userSchema = new Schema({
-		username: {
+		email: {
 			type: String,
 			required: true,
-			index: {
-				unique: true
-			}
+			trim: true
 		},
-		password: {
+		fname: {
 			type: String,
-			required: true
+			required: false,
+			trim: true
+		},
+		lname: {
+			type: String,
+			required: false,
+			trim: true
 		}
-	}, {
-		versionKey: false
 	});
 
 	return mongoose.model('user', userSchema);

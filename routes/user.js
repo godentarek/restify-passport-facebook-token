@@ -1,9 +1,10 @@
-module.exports = function(server, db) {
+module.exports = function(api, db) {
 
 	var users = require('../controllers/users')(db);
-	var fin = function(req, res) {
-		res.send();
-	};
 
-	server.get('/user/:uid([0-9a-f]+)', users.show);
+	api.get('/user', users.getAll);
+	api.get('/user/:id([0-9]+)', users.get);
+	api.post('/user', users.post);
+	api.put('/user/:id([0-9]+)', users.put);
+	api.del('/user/:id([0-9]+)', users.del);
 }
