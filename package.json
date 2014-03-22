@@ -3,7 +3,7 @@
         "mongoose": "~3.8.8",
         "passport": "~0.2.0",
         "passport-facebook": "~1.0.3",
-        "passport-facebook-token": "~0.2.0",
+        "passport-facebook-token": "~0.3.0",
         "restify": "~2.6.3"
     },
     "name": "node-restify-passport-mongoose-api",
